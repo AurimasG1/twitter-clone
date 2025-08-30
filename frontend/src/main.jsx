@@ -10,6 +10,11 @@ const queryClient = new QueryClient({
     queries: {
       refetchOnWindowFocus: false,
       retry: false,
+      queryFn: async () => {
+        const res = await fetch(`/api/auth/me`);
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      }
     }
   }
 });
