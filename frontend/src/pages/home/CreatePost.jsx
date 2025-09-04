@@ -10,7 +10,14 @@ const CreatePost = () => {
     const [img, setImg] = useState(null);
     const imgRef = useRef(null);
 
-    const { data: authUser } = useQuery({ queryKey: ['authUser'] });
+    const { data: authUser } = useQuery({
+        queryKey: ['authUser'],
+        queryFn: async () => {
+            const res = await fetch('/api/auth/me');
+            if (!res.ok) return null;
+            return res.json();
+        }
+    })
     const queryClient = useQueryClient();
 
     const { mutate: createPost, isPending, isError, error } = useMutation({
