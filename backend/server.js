@@ -21,7 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 const __dirname = path.resolve();
 
-app.use(express.json({ limit: '2mb' })); // to parse req.body DoS attack denial of service
+app.use(express.json({ limit: '6mb' })); // to parse req.body DoS attack denial of service
 // limit shouldn't be too high to prevent DoS
 app.use(express.urlencoded({ extended: true })); // to parse from data
 
